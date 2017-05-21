@@ -26,8 +26,13 @@ type bosons =
   | Higgs
 ;;
 
-type meson = quark * quark * quark;;
-type hadron = quark * quark;; (*Position 2 réservé à l'antiquark*)
+type reality =
+| Anti
+| Normal
+;;
+
+type baryon = quark * quark * quark;;
+type meson = quark * quark;; (*Position 2 réservé à l'antiquark*)
 
 type hadron =
   | Baryon of baryon
@@ -61,6 +66,28 @@ let masse_quark = function
 | Bottom -> 4200000
 ;;
 
+let addition_baryon = function
+| (Up, Up, Down) -> Lepton of Electron
+| (Up, Down, Down) -> Lepton of Neutron
+| (Up, Down, Strange) -> Lambda
+| (Up, Up, Strange) -> Sigma_plus
+| (Down, Down, Charm) -> Sigma_moins (*To check*)
+| (Down, Strange, Strange) -> Xi_moins
+| (Up, Strange, Strange) -> Xi_zero
+| (Up, Up, Up) -> Omega_moins
+;;
+
+let addition_meson = function (*Antiparticule pour le second membre*)
+| (Up, Down) -> Pion_p
+| (Down, Up) -> Pion_n
+| (Up, Strange) -> Kaon_p
+| (Strange, Up) -> Kaon_n
+| (Down, Strange) -> Kaon_neutral
+| (Strange, Down) -> Anti_Kaon_neutral
+| (Charm, Charm) -> Meson_pi
+| (Bottom, Bottom) -> Meson_upsilon
+;;
+
 
 
 
@@ -82,6 +109,9 @@ struct
                   | Lepton x -> masse_lepton x
                   | Quark x -> masse_quark x
                 ;;
+                let quarks_addition  = function
+                  | Baryon x * y ->
+                  | Meson x * y * z ->
 
 end;;
 
