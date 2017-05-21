@@ -110,8 +110,8 @@ struct
                   | Quark x -> masse_quark x
                 ;;
                 let quarks_addition  = function
-                  | Baryon x * y ->
-                  | Meson x * y * z ->
+                  | Baryon x * y -> addition_baryon (x, y)
+                  | Meson x * y * z -> addition_meson (x, y, z)
 
 end;;
 
